@@ -1,0 +1,5 @@
+1. avvio nuovo progetto laravel (con cartella repo vuota aperta su vs code): terminale: composer create-project --prefer-dist laravel/laravel:^7.0 .
+    CTRL+R 
+
+2. creo il db vuoto con phpmyadmin (laravel_auth)
+
