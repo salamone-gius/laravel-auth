@@ -13,3 +13,12 @@
     npm install
     npm run dev
 
+6. mi aggancio al db dal .env. Ogni volta che si cambia qualcosa in questo file bisogna pulire la cache di configurazione:
+    php artisan config:clear
+
+7. faccio la migration per creare le tabelle a db:
+    php artisan migrate
+
+8. lancio il server per lo sviluppo:
+    php artisan serve
+
