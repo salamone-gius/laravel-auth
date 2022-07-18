@@ -32,4 +32,34 @@
         php artisan make:controller Admin/HomeController
 
     - copio tutta la classe di HomeController, la incollo nell'HomeController appena creato (namespace: Admin) e cancello l'originale
+
+    - cancello il costruttore all'interno della classe HomeController in modo da gestire il middleware con le rotte
+
+    - definisco tutte le rotte del backoffice nel web.php:
+
+        // definisco dentro un gruppo tutte le rotte che voglio proteggere con l'autenticazione:
+
+        // tutte le rotte avranno lo stesso middleware ('auth');
+        Route::middleware('auth')
+
+            // tutte le rotte avranno lo stesso namespace (i controller saranno dentro la sottocartella 'Admin');
+            ->namespace('Admin')
+
+            // i nomi di tutte le rotte inizieranno con 'admin.';
+            ->name('admin.')
+
+            // tutte le rotte avranno lo stesso prefisso url '/admin/';
+            ->prefix('admin')
+
+            // inserisco tutte le rotte che devono essere protette da autenticazione (backoffice)
+            ->group(function () {
+
+                // /home/admin/
+                Route::get('/home', 'HomeController@index')->name('home');
+
+            });
+
+    - lancio il comando per verificare le rotte:
+        php artisan route:list
+
     

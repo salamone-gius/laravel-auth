@@ -19,4 +19,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// definisco dentro un gruppo tutte le rotte che voglio proteggere con l'autenticazione:
+
+// tutte le rotte avranno lo stesso middleware ('auth');
+Route::middleware('auth')
+
+    // tutte le rotte avranno lo stesso namespace (i controller saranno dentro la sottocartella 'Admin');
+    ->namespace('Admin')
+
+    // i nomi di tutte le rotte inizieranno con 'admin.';
+    ->name('admin.')
+
+    // tutte le rotte avranno lo stesso prefisso url '/admin/';
+    ->prefix('admin')
+
+    // inserisco tutte le rotte che devono essere protette da autenticazione (backoffice)
+    ->group(function () {
+
+        // /home/admin/
+        Route::get('/home', 'HomeController@index')->name('home');
+
+    });
+
