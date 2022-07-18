@@ -22,3 +22,14 @@
 8. lancio il server per lo sviluppo:
     php artisan serve
 
+9. verifico che tutto sia andato a buon fine:
+    localhost:8000 -> welcome di laravel + login - register
+    se provo a registrarmi vengo reindirizzato su http://localhost:8000/home dove mi compare la dashboard con il messaggio: "You are logged in!"
+
+10. pulisco e organizzo il codice per dividere bene frontoffice da backoffice:
+
+    - creo un controller uguale a quello che mi ha creato laravel al punto 4 (HomeController) ma sotto namespace Admin per separare la parte admin (autenticato) e la parte pubblica:
+        php artisan make:controller Admin/HomeController
+
+    - copio tutta la classe di HomeController, la incollo nell'HomeController appena creato (namespace: Admin) e cancello l'originale
+    
