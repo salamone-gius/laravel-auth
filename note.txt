@@ -71,4 +71,8 @@
 
     - adesso la dashboard con il messaggio: "You are logged in!" ha come url http://localhost:8000/admin/home
 
+    - in resources > views > welcome.blade modifico il link per far si che reindirizzi alla rotta '/admin/home'
+
+        {{-- cambiando url() in route() possiamo dargli il nome della rotta --}}
+        <a href="{{ route('admin.home') }}">Home</a>
 
