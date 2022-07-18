@@ -62,4 +62,13 @@
     - lancio il comando per verificare le rotte:
         php artisan route:list
 
-    
+    - avendo spostato la uri da /home a /admin/home, devo andare a configurare laravel in modo che reindirizzi alla pagina corretta:
+
+        in app > Providers > RouteServiceProvider.php:
+
+            // modifico la const HOM£ da '/home' a '/admin/home'
+            public const HOME = '/admin/home';
+
+    - adesso la dashboard con il messaggio: "You are logged in!" ha come url http://localhost:8000/admin/home
+
+
