@@ -95,7 +95,21 @@
 
         - in resources > sass creo un file 'front.scss';
 
-        - in resources > js creo una cartella 'views' al cui interno definisco il componente 'App.vue';
+        - in resources > js creo una cartella 'views' al cui interno definisco il componente 'App.vue':
+
+            <template>
+                <h1>Vue.js</h1>
+            </template>
+
+            <script>
+            export default {
+                name: 'App',
+            }
+            </script>
+
+            <style>
+
+            </style>
 
         - in resources > js creo un file 'front.js':
 
@@ -125,10 +139,3 @@
             <script src="{{asset('js/front.js')}}"></script>
 
         - resetto npm run watch (stacco e rilancio)
-
-
-
-
-
-
-
