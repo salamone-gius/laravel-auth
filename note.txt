@@ -9,3 +9,7 @@
 4. installato il pacchetto laravel/ui, installo lo scaffolding frontend usando il comando Artisan ui:
     php artisan ui vue --auth (--auth crea già una struttura per l'autenticazione)
 
+5. installo la node module per compilare gli asset:
+    npm install
+    npm run dev
+
