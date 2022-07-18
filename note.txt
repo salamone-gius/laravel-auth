@@ -1,5 +1,11 @@
-1. avvio nuovo progetto laravel (con cartella repo vuota aperta su vs code): terminale: composer create-project --prefer-dist laravel/laravel:^7.0 .
-    CTRL+R 
+1. avvio nuovo progetto laravel (con cartella repo vuota aperta su vs code):
+    composer create-project --prefer-dist laravel/laravel:^7.0 .
 
 2. creo il db vuoto con phpmyadmin (laravel_auth)
+
+3. installo nel progetto la laravel/ui (parte frontend) che fornisce lo scaffolding Bootstrap e Vue fornito da Laravel:
+    composer require laravel/ui:^2.4
+
+4. installato il pacchetto laravel/ui, installo lo scaffolding frontend usando il comando Artisan ui:
+    php artisan ui vue --auth (--auth crea già una struttura per l'autenticazione)
 
