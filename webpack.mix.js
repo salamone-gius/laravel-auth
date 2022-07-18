@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
+// creo le direttive per compilare scss e js
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .js('resources/js/front.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/front.scss', 'public/css');

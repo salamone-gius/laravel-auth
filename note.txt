@@ -83,12 +83,52 @@
         - sposto 'home.blade' nella cartella 'admin' e modifico il percorso nell'HomeController ('admin.home')
 
         - creo un'altra pagina home.blade dentro 'guest' che conterrà l'applicativo in Vue.js che gestirà la parte frontend
-        
+
         - in web.php definisco una rotta di fallback che reindirizzerà tutte le rotte che non fanno parte del backoffice al file dove Vue.js gestisce il frontoffice:
 
             // sotto tutte le altre rotte, ne definisco una di fallback che reindirizza tutte le rotte che non fanno parte dal backoffice alla pagina Vue.js che gestirà il frontoffice 
             Route::any('{any?}', function() {
                 return view('guest.home');
             })->where('any', '.*');
+
+    - a questo punto bisogna iniziare a creare lo scaffolding di Vue.js per separare javscript e stile frontoffice da backoffice:
+
+        - in resources > sass creo un file 'front.scss';
+
+        - in resources > js creo una cartella 'views' al cui interno definisco il componente 'App.vue';
+
+        - in resources > js creo un file 'front.js':
+
+            // includo la libreria Vue.js
+            window.Vue = require('vue');
+
+            // importo il componente principale della nostra applicazione 'App.vue'
+            import App from './views/App.vue';
+
+            // renderizzo App all'avvio
+            const app = new Vue({
+                el: '#app',
+                render: h => h(App),
+            });
+
+        - in webpack.mix.js aggiungo le direttive per la compilazione di javascript e scss:
+
+            // creo le direttive per compilare scss e js
+            mix.js('resources/js/app.js', 'public/js')
+                .js('resources/js/front.js', 'public/js')
+                .sass('resources/sass/app.scss', 'public/css')
+                .sass('resources/sass/front.scss', 'public/css');
+
+        - in resources > views > guest > home.blade linko i file js e css appena creati:
+
+            <link rel="stylesheet" href="{{asset('css/front.css')}}">
+            <script src="{{asset('js/front.js')}}"></script>
+
+        - resetto npm run watch (stacco e rilancio)
+
+
+
+
+
 
 
