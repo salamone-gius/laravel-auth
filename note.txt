@@ -76,3 +76,19 @@
         {{-- cambiando url() in route() possiamo dargli il nome della rotta --}}
         <a href="{{ route('admin.home') }}">Home</a>
 
+    - organizzo parti frontend e parti backend anche a livello di cartelle (views e asset):
+
+        - in resources > views creo le cartelle 'guest' e 'admin'
+
+        - sposto 'home.blade' nella cartella 'admin' e modifico il percorso nell'HomeController ('admin.home')
+
+        - creo un'altra pagina home.blade dentro 'guest' che conterrà l'applicativo in Vue.js che gestirà la parte frontend
+        
+        - in web.php definisco una rotta di fallback che reindirizzerà tutte le rotte che non fanno parte del backoffice al file dove Vue.js gestisce il frontoffice:
+
+            // sotto tutte le altre rotte, ne definisco una di fallback che reindirizza tutte le rotte che non fanno parte dal backoffice alla pagina Vue.js che gestirà il frontoffice 
+            Route::any('{any?}', function() {
+                return view('guest.home');
+            })->where('any', '.*');
+
+
