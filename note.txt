@@ -153,3 +153,6 @@
 
 15. creo il controller che farà da tramite tra il model e una view direttamente con namespace 'Admin' e già scaffoldato (!?) per le operazioni di CRUD (con --resource)
     php artisan make:controller Admin/PostController --resource
+
+16. creo le rotte per arrivare ai metodi del PostController
+    

@@ -47,6 +47,9 @@ Route::middleware('auth')
     // /home/admin/
     Route::get('/home', 'HomeController@index')->name('home');
 
+    // aggiungo la rotta per il PostController. Il metodo resource() nel middleware crea in automatico tutte le rotte del PostController utili per tutte le operazioni di CRUD (index, create, ecc...)
+    Route::resource('posts', 'PostController');
+
     });
 
 
