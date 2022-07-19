@@ -55,6 +55,15 @@ class PostController extends Controller
         // non avendolo previsto nel form, ma dovendolo avere come dato in tabella, devo generare qui uno slug univoco partendo dal title (ce lo genera laravel da una stringa)
         $slug = Str::of($newPost->title)->slug('-');
 
+        // imposto un contatore per il controllo sullo slug
+        $count = 1;
+
+        // controllo sull'unicità dello slug 
+        while (Post::where('slug', $slug)->first()) {
+            $slug = Str::of($newPost->title)->slug('-') . "-{$count}";
+            $count++;
+        }
+
         // assegno lo slug appena creato dal title al campo slug del newPost
         $newPost->slug = $slug;
 
