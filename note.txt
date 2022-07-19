@@ -142,3 +142,8 @@
 
 11. creo la tabella 'posts' dentro al db:
     php artisan make:migration create_posts_table
+
+12. in database > migrations > data_odierna_create_posts_table.php inizializzo le colonne della tabella e indico il tipo di dato con cui le andrò a popolare
+
+13. creo a db la tabella e le colonne appena inizializzate:
+    php artisan migrate
