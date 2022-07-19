@@ -150,3 +150,6 @@
 
 14. creo il model che sarà il modello della tabella che farà da tramite tra laravel e la tabella a db
     php artisan make:model Post
+
+15. creo il controller che farà da tramite tra il model e una view direttamente con namespace 'Admin' e già scaffoldato (!?) per le operazioni di CRUD (con --resource)
+    php artisan make:controller Admin/PostController --resource
