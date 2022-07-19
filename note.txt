@@ -147,3 +147,6 @@
 
 13. creo a db la tabella e le colonne appena inizializzate:
     php artisan migrate
+
+14. creo il model che sarà il modello della tabella che farà da tramite tra laravel e la tabella a db
+    php artisan make:model Post
