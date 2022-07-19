@@ -163,3 +163,15 @@
 19. in resources > views > layouts laravel crea il layout mezzo predisposto 'app.blade.php' con uno @yield('content') nel main
 
 20. nel create.blade estendo il layout di app.blade (@extends) e creo una @section('content') dove inserirò i contenuti
+
+21. nel card-body del create.blade aggiungo il form per la creazione di un nuovo post:
+
+    - nell'attributo action del tag form definisco la rotta che punta allo store per immagazzinare gli elementi del nuovo post (al submit creerà una nuova riga della tabella):
+        <form action="{{route('admin.posts.index')}}">;
+
+    - nell'attributo method del tag form definisco il metodo POST:
+        <form action="{{route('admin.posts.index')}}" method="POST">;
+
+    - aggiungo il token di validazione di laravel @csrf:
+        <form action="{{route('admin.posts.index')}}" method="POST">
+            @csrf
