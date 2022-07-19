@@ -175,3 +175,10 @@
     - aggiungo il token di validazione di laravel @csrf:
         <form action="{{route('admin.posts.index')}}" method="POST">
             @csrf
+
+    - aggiungo/modifico un tag input per ogni elemento (colonna) della tabella:
+        - imposto l'attributo type del tag input;
+        - l'attributo for del tag label deve matchare con l'attributo id del tag input;
+        - l'attributo name (importantissimo) deve matchare con il nome della colonna che dovrà andare a riempire.
+
+

@@ -10,17 +10,21 @@
             <form action="{{route('admin.posts.index')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
+                {{-- si potrebbe aggiungere la WYSIWYG ckeditor (textarea con possibilità di personalizzare il testo), ma poi i dati che ritornerebbero sarebbero troppo complessi da gestire (per il momento)  --}}
+                {{-- <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="ckeditor form-control" id="content" name="content"></textarea>
+                </div> --}}
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" name="content" rows="6"></textarea>
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <input type="checkbox" class="form-check-input" id="published" name="published">
+                    <label class="form-check-label" for="published">Post</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
@@ -29,3 +33,11 @@
 </div>
     
 @endsection
+
+{{-- aggiungo lo script per istanziare la WYSIWYG ckeditor (textarea con possibilità di personalizzare il testo) --}}
+{{-- <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
+    });
+</script> --}}
