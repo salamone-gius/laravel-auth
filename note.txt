@@ -160,3 +160,6 @@
 
 18. in resources > views > admin > posts creo la view create.blade.php e la vado ad inserire all'interno del metodo view() del return del metodo create() del PostController (che al mercato mio padre comprò)
 
+19. in resources > views > layouts laravel crea il layout mezzo predisposto 'app.blade.php' con uno @yield('content') nel main
+
+20. nel create.blade estendo il layout di app.blade (@extends) e creo una @section('content') dove inserirò i contenuti
