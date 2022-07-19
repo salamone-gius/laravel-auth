@@ -155,4 +155,8 @@
     php artisan make:controller Admin/PostController --resource
 
 16. creo le rotte per arrivare ai metodi del PostController
-    
+
+17. in resources > views > admin creo la cartella 'posts' dove inserirò ogni singola risorsa
+
+18. in resources > views > admin > posts creo la view create.blade.php e la vado ad inserire all'interno del metodo view() del return del metodo create() del PostController (che al mercato mio padre comprò)
+
