@@ -5,6 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+// importo la classe helper (prima dei modelli) che ha molti metodi per le stringhe che possono tornare utili, tipo per la generazione dello slug (store())
+use Illuminate\Support\Str;
+
+// importo il model di riferimento
+use App\Post;
+
+
 class PostController extends Controller
 {
     /**
@@ -36,8 +43,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // verifico se i dati inseriti dall'utente nel form mi arrivano correttamente
-        dd($request->all());
+        // prendo i dati dalla request
+        $data = $request->all();
+
+        // istanzio il nuovo post
+        $newPost = new Post();
+
+        // lo fillo attraverso il mass assignment che avrò già abilitato nel model Post
+        $newPost->fill($data);
+
+        // non avendolo previsto nel form, ma dovendolo avere come dato in tabella, devo generare qui uno slug univoco partendo dal title (ce lo genera laravel da una stringa)
+        $slug = Str::of($newPost->title)->slug('-');
+
+        // assegno lo slug appena creato dal title al campo slug del newPost
+        $newPost->slug = $slug;
+
+        // devo settare la checkbox in modo che restituisca un valore booleano (di default la checkbox restituisce "on" se è checkata e lo devo trasformare in "true")
+        // il metodo isset() restituisce true o false. In questo caso "se esiste" restituisce true, altrimenti false
+        $newPost->published = isset($data['published']);
+
+        // salvo i dati a db
+        $newPost->save();
+
+        // reindirizzo alla rotta che mi restituisce la view del post appena creato 
+        return redirect()->route('admin.posts.show', $newPost->id);
     }
 
     /**

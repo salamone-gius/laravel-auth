@@ -185,5 +185,36 @@
         nel PostController, all'interno del metodo store():
             dd($request->all());
 
+22.  nel metodo store() nel PostController imposto la logica relativa all'immagazzinamento a db dei dati arrivati dal form:
+
+    public function store(Request $request)
+    {
+        // prendo i dati dalla request
+        $data = $request->all();
+
+        // istanzio il nuovo post
+        $newPost = new Post();
+
+        // lo fillo attraverso il mass assignment che avrò già abilitato nel model Post
+        $newPost->fill($data);
+
+        // non avendolo previsto nel form, ma dovendolo avere come dato in tabella, devo generare qui uno slug univoco partendo dal title (ce lo genera laravel da una stringa)
+        $slug = Str::of($newPost->title)->slug('-');
+
+        // assegno lo slug appena creato dal title al campo slug del newPost
+        $newPost->slug = $slug;
+
+        // devo settare la checkbox in modo che restituisca un valore booleano (di default la checkbox restituisce "on" se è checkata e lo devo trasformare in "true")
+        // il metodo isset() restituisce true o false. In questo caso "se esiste" restituisce true, altrimenti false
+        $newPost->published = isset($data['published']);
+
+        // salvo i dati a db
+        $newPost->save();
+
+        // reindirizzo alla rotta che mi restituisce la view del post appena creato 
+        return redirect()->route('admin.posts.show', $newPost->id);
+    }
+
+
 
 
