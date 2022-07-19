@@ -36,7 +36,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // verifico se i dati inseriti dall'utente nel form mi arrivano correttamente
+        dd($request->all());
     }
 
     /**

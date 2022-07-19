@@ -181,4 +181,9 @@
         - l'attributo for del tag label deve matchare con l'attributo id del tag input;
         - l'attributo name (importantissimo) deve matchare con il nome della colonna che dovrà andare a riempire.
 
+    - verifico se i dati inseriti dall'utente nel form mi arrivano correttamente:
+        nel PostController, all'interno del metodo store():
+            dd($request->all());
+
+
 
