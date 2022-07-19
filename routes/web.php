@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// BACKOFFICE - AREA PUBBLICA (blade) \\
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+
+// BACKOFFICE - AREA PUBBLICA (AREA DI AUTENTICAZIONE: REGISTRAZIONE, LOGIN, RECUPERO PASSWORD) (blade) \\
+
 Auth::routes();
+
+
+// BACKOFFICE - AREA PRIVATA (CRUD, VISIBILE SOLO ALL'UTENTE REGISTRATO) (blade) \\
 
 // definisco dentro un gruppo tutte le rotte che voglio proteggere con l'autenticazione:
 
@@ -36,13 +44,15 @@ Route::middleware('auth')
     // inserisco tutte le rotte che devono essere protette da autenticazione (backoffice)
     ->group(function () {
 
-        // /home/admin/
-        Route::get('/home', 'HomeController@index')->name('home');
+    // /home/admin/
+    Route::get('/home', 'HomeController@index')->name('home');
 
     });
 
+
+// FRONTOFFICE - AREA PUBBLICA (rendering con Vue.js)\\
+
 // sotto tutte le altre rotte, ne definisco una di fallback che reindirizza tutte le rotte che non fanno parte dal backoffice alla pagina Vue.js che gestirà il frontoffice 
-Route::any('{any?}', function() {
+Route::get('{any?}', function() {
     return view('guest.home');
 })->where('any', '.*');
-

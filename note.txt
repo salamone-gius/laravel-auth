@@ -139,3 +139,6 @@
             <script src="{{asset('js/front.js')}}"></script>
 
         - resetto npm run watch (stacco e rilancio)
+
+11. creo la tabella 'posts' dentro al db:
+    php artisan make:migration create_posts_table
