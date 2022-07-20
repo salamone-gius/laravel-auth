@@ -223,3 +223,6 @@
         // reindirizzo alla rotta che mi restituisce la view del post appena creato 
         return redirect()->route('admin.posts.show', $newPost->id);
     }
+
+23. inserisco il controllo dello slug in un metodo privato in modo da poterne richiamare la logica in altri punti del controller
+

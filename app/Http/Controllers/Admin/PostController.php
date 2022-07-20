@@ -52,20 +52,8 @@ class PostController extends Controller
         // lo fillo attraverso il mass assignment che avrò già abilitato nel model Post
         $newPost->fill($data);
 
-        // non avendolo previsto nel form, ma dovendolo avere come dato in tabella, devo generare qui uno slug univoco partendo dal title (ce lo genera laravel da una stringa)
-        $slug = Str::of($newPost->title)->slug('-');
-
-        // imposto un contatore per il controllo sullo slug
-        $count = 1;
-
-        // controllo sull'unicità dello slug 
-        while (Post::where('slug', $slug)->first()) {
-            $slug = Str::of($newPost->title)->slug('-') . "-{$count}";
-            $count++;
-        }
-
-        // assegno lo slug appena creato dal title al campo slug del newPost
-        $newPost->slug = $slug;
+        // lo slug sarà il risultato del metodo getSlug() dove gli passo il title
+        $newPost->slug = $this->getSlug($newPost->title);
 
         // devo settare la checkbox in modo che restituisca un valore booleano (di default la checkbox restituisce "on" se è checkata e lo devo trasformare in "true")
         // il metodo isset() restituisce true o false. In questo caso "se esiste" restituisce true, altrimenti false
@@ -121,5 +109,25 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // creo un metodo privato (passandogli $title) che mi restituisce lo slug visto che la stessa logica la utilizzerò nell'update
+    private function getSlug($title) {
+
+        // non avendolo previsto nel form, ma dovendolo avere come dato in tabella, devo generare qui uno slug univoco partendo dal title (ce lo genera laravel da una stringa)
+        $slug = Str::of($title)->slug('-');
+
+        // imposto un contatore per il controllo sullo slug
+        $count = 1;
+
+        // controllo sull'unicità dello slug 
+        while (Post::where('slug', $slug)->first()) {
+            $slug = Str::of($title)->slug('-') . "-{$count}";
+            $count++;
+        }
+
+        // restituisco lo slug
+        return $slug;
+
     }
 }
