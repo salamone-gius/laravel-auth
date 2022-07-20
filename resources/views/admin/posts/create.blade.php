@@ -11,7 +11,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title')}}">
                     @error('title')
                         <div class="alert alert-danger">{{$message}}</div>
                     @enderror
@@ -23,13 +23,13 @@
                 </div> --}}
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="6"></textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="6">{{old('content')}}</textarea>
                     @error('content')
                         <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" id="published" name="published">
+                    <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" id="published" name="published" {{old('published') ? 'checked' : ''}}>
                     <label class="form-check-label" for="published">Post</label>
                     @error('published')
                         <div class="alert alert-danger">{{$message}}</div>

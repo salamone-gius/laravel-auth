@@ -240,8 +240,11 @@
 
     - aggiungo, subito sotto al campo input, un div (sempre tra @error - @enderror) che, se quel dato che l'utente ha inserito non passa la validazione, mostra un messaggio di errore evidenziato in rosso sotto il campo input:
 
-    example:    <label for="title">Title</label>
+    esempio:    <label for="title">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
                 @error('title')
                     <div class="alert alert-danger">{{$message}}</div>
                 @enderror
+
+25. al form nel create.blade aggiungo, ad ogni attributo value di ogni campo input, ( value="{{old('nomeCampoInput')}}" ) il metodo old() che, nel caso in cui i dati inseriti dall'utente non passino la validazione, restituisce il dato (corretto) con cui era stato precedentemente popolato. Nella textarea si mette all'interno (non ha attributo value), per la checkbox bisogna fare un controllo ( {{old('nomeCampoInput') ? 'checked' : ''}} )
+
