@@ -189,6 +189,14 @@
 
     public function store(Request $request)
     {
+        // valido i dati che arrivano dal form del create
+        $request->validate([
+            // passo al metodo validate() un array associativo in cui la chiave sarà il dato che devo controllare e come valore le caratteristiche che quel dato deve avere per poter "passare" la validazione (vedi doc: validation)
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:65535',
+            'published' => 'sometimes|accepted',
+        ]);
+
         // prendo i dati dalla request
         $data = $request->all();
 
