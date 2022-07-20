@@ -84,9 +84,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    // passo il model e il singolo $post come argomento del metodo show (dependancy injection)
+    public function show(Post $post)
     {
-        //
+        //restituisco la view 
+        return view('admin.posts.show', compact('post'));
     }
 
     /**

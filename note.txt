@@ -255,3 +255,11 @@
     - in PostController dentro il metodo index() setto il return della view della pagina blade appena creata passandogli tutti i post;
 
     - in index.blade creo una tabella che conterrà l'elenco di tutti i post, i dettagli di ogni post e le azioni per ogni singolo post.
+
+27. terminata la parte Read, passo alla parte Show (visualizzazione del singolo post):
+
+    - in resources > views > admin > posts creo la pagina show.blade;
+
+    - in PostController dentro il metodo show() setto il return della view della pagina blade appena creata passandogli direttamente il model e il singolo post come argomento (dependancy injection);
+
+    - in show.blade creo una card che conterrà il singolo post e un bottone per tornare all'elenco dei post.
