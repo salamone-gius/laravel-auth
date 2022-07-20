@@ -12,12 +12,12 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Slug</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" class="text-center">Title</th>
+                        <th scope="col" class="text-center">Slug</th>
+                        <th scope="col" class="text-center">Content</th>
+                        <th scope="col" class="text-center">Status</th>
+                        <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                             <td>{{$post->title}}</td>
                             <td>{{$post->slug}}</td>
                             <td class="text-truncate" style="max-width: 100px;">{{$post->content}}</td>
-                            <td>
+                            <td class="d-flex justify-content-center align-items-center">
                                 @if ($post->published)
                                     <span class="badge badge-pill badge-success">
                                         Posted
@@ -45,10 +45,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center align-items-center m-4">
-                <a href="{{route('admin.posts.create')}}" class="btn btn-secondary">Create new post</a>
-            </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center m-4">
+        <a href="{{route('admin.posts.create')}}" class="btn btn-success">Create new post</a>
     </div>
 </div>
     
