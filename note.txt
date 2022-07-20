@@ -262,4 +262,8 @@
 
     - in PostController dentro il metodo show() setto il return della view della pagina blade appena creata passandogli direttamente il model e il singolo post come argomento (dependancy injection);
 
-    - in show.blade creo una card che conterrà il singolo post e un bottone per tornare all'elenco dei post.
+    - in show.blade creo una card che conterrà il singolo post e un bottone per tornare all'elenco dei post;
+
+    - aggiungo qualche link/bottone per la navigazione.
+
+

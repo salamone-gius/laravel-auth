@@ -45,6 +45,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center align-items-center m-4">
+                <a href="{{route('admin.posts.create')}}" class="btn btn-secondary">Create new post</a>
+            </div>
         </div>
     </div>
 </div>

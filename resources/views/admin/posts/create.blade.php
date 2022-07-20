@@ -39,6 +39,9 @@
             </form>
         </div>
     </div>
+    <div class="d-flex justify-content-center align-items-center m-4">
+        <a href="{{route('admin.posts.index')}}" class="btn btn-secondary">Return to all posts</a>
+    </div>
 </div>
     
 @endsection
