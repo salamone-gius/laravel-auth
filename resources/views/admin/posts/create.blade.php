@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h1>Crete new post</h1>
+            <h1>Create new post</h1>
         </div>
         <div class="card-body">
             <form action="{{route('admin.posts.index')}}" method="POST">

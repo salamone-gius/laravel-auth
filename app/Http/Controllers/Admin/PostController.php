@@ -21,7 +21,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // passo tutti i post alla variabile $posts
+        $posts = Post::all();
+
+        //restituisce la view con la lettura di tutti i post
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**

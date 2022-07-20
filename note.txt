@@ -248,3 +248,10 @@
 
 25. al form nel create.blade aggiungo, ad ogni attributo value di ogni campo input, ( value="{{old('nomeCampoInput')}}" ) il metodo old() che, nel caso in cui i dati inseriti dall'utente non passino la validazione, restituisce il dato (corretto) con cui era stato precedentemente popolato. Nella textarea si mette all'interno (non ha attributo value), per la checkbox bisogna fare un controllo ( {{old('nomeCampoInput') ? 'checked' : ''}} )
 
+26. terminata la parte Create, passo alla parte Read:
+
+    - in resources > views > admin > posts creo la pagina index.blade;
+
+    - in PostController dentro il metodo index() setto il return della view della pagina blade appena creata passandogli tutti i post;
+
+    - in index.blade creo una tabella che conterrà l'elenco di tutti i post, i dettagli di ogni post e le azioni per ogni singolo post.
