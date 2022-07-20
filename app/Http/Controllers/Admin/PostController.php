@@ -121,8 +121,11 @@ class PostController extends Controller
         $count = 1;
 
         // controllo sull'unicità dello slug 
+        // FINTANTO CHE all'interno della tabella posts(Post::) trovi (first()) uno slug ('slug') uguale a questa stringa ($slug)...
         while (Post::where('slug', $slug)->first()) {
+            // ...assegno a $slug il valore di $slug concatenato (. "{}") ad un trattino ed un numero ($count)...
             $slug = Str::of($title)->slug('-') . "-{$count}";
+            // ...incremento $count di 1.
             $count++;
         }
 
