@@ -256,7 +256,7 @@
 
     - in index.blade creo una tabella che conterrà l'elenco di tutti i post, i dettagli di ogni post e le azioni per ogni singolo post.
 
-27. terminata la parte Read, passo alla parte Show (visualizzazione del singolo post):
+27. completo la parte Read settando la parte show (fa sempre parte della Read) (visualizzazione del singolo post):
 
     - in resources > views > admin > posts creo la pagina show.blade;
 
@@ -265,5 +265,74 @@
     - in show.blade creo una card che conterrà il singolo post e un bottone per tornare all'elenco dei post;
 
     - aggiungo qualche link/bottone per la navigazione.
+
+28. completata la parte Read, passo alla parte Update (come la Create è divisa in due parti: form (edit) e azione sul db (update)):
+
+    - in resources > views > admin > posts creo la pagina edit.blade;
+
+    - in PostController dentro il metodo edit() setto il return della view della pagina blade che contiene il post da modificare passandogli direttamente il model e il singolo post (da modificare) come argomento (dependancy injection);
+
+    - in PostController dentro il metodo update() imposto la logica per l'aggiornamento del db:
+
+        // oltre a passare (di default) i dati che arrivano dal form ($request) passo il model e il singolo $post come argomento del metodo update (dependancy injection)
+        public function update(Request $request, Post $post)
+        {
+            // valido i dati che arrivano dal form dell'edit
+            $request->validate([
+                // passo al metodo validate() un array associativo in cui la chiave sarà il dato che devo controllare e come valore le caratteristiche che quel dato deve avere per poter "passare" la validazione (vedi doc: validation)
+                'title' => 'required|string|max:255',
+                'content' => 'required|string|max:65535',
+                'published' => 'sometimes|accepted',
+            ]);
+
+            // prendo i dati dalla request
+            $data = $request->all();
+
+            // gestisco lo slug nel caso cambiasse il titolo
+            // SE il titolo del post è diverso da quello che mi arriva dalla request...
+            if ($post->title != $data['title']) {
+                // ...imposto il nuovo slug partendo dal nuovo titolo
+                $post->slug = $this->getSlug($data['title']);
+            }
+
+            // faccio il fill() della $request
+            $post->fill($data);
+
+            // devo settare la checkbox in modo che restituisca un valore booleano (di default la checkbox restituisce "on" se è checkata e lo devo trasformare in "true")
+            // il metodo isset() restituisce true o false. In questo caso "se esiste" restituisce true, altrimenti false
+            $post->published = isset($data['published']);
+
+            // salvo le modifiche al post a db
+            $post->save();
+
+            // salvo le modifiche al post a db passandogli quello che mi arriva dal form
+            // $post->update($data);
+            // in questo caso specifico non posso usare il metodo update perchè mi va in conflitto con la logica che gestisce lo slug
+
+            // reindirizzo alla rotta che mi restituisce la view del post appena modificato passandolgi l'id del post
+            return redirect()->route('admin.posts.show', $post->id);
+        }
+
+    - in edit.blade copio/incollo il form di create.blade, facendo qualche variazione:
+
+        - aggiungo un secondo paramentro al metodo old() in tutti gli input che mi fa comparire i campi più recenti (risalenti all'ultima modifica);
+
+        - nell'attributo action del tag form definisco la rotta che punta all'update per modificare gli elementi del post (al submit cambierà i valori in tabella) passandogli l'id del post che sarà modificato:
+            <form action="{{route('admin.posts.update', $post->id)}}">;
+
+        - nell'attributo method del tag form lascio il metodo POST:
+            <form action="{{route('admin.posts.update')}}" method="POST">;
+
+        - lascio il token di validazione di laravel @csrf:
+            <form action="{{route('admin.posts.update')}}" method="POST">
+                @csrf;
+
+        - aggiungo il metodo PUT attraverso il metodo @method:
+            <form action="{{route('admin.posts.update')}}" method="POST">
+                @csrf
+                @method('PUT')
+
+    - aggiungo qualche link/bottone per la navigazione.
+
 
 

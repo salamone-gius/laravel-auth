@@ -98,9 +98,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    // passo il model e il singolo $post come argomento del metodo show (dependancy injection)
+    public function edit(Post $post)
     {
-        //
+        // restituisco la view di modifica del post e il singolo post (da modificare)
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -110,9 +113,44 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    // oltre a passare (di default) i dati che arrivano dal form ($request) passo il model e il singolo $post come argomento del metodo update (dependancy injection)
+    public function update(Request $request, Post $post)
     {
-        //
+        // valido i dati che arrivano dal form dell'edit
+        $request->validate([
+            // passo al metodo validate() un array associativo in cui la chiave sarà il dato che devo controllare e come valore le caratteristiche che quel dato deve avere per poter "passare" la validazione (vedi doc: validation)
+            'title' => 'required|string|max:255',
+            'content' => 'required|string|max:65535',
+            'published' => 'sometimes|accepted',
+        ]);
+
+        // prendo i dati dalla request
+        $data = $request->all();
+
+        // gestisco lo slug nel caso cambiasse il titolo
+        // SE il titolo del post è diverso da quello che mi arriva dalla request...
+        if ($post->title != $data['title']) {
+            // ...imposto il nuovo slug partendo dal nuovo titolo
+            $post->slug = $this->getSlug($data['title']);
+        }
+
+        // faccio il fill() della $request
+        $post->fill($data);
+
+        // devo settare la checkbox in modo che restituisca un valore booleano (di default la checkbox restituisce "on" se è checkata e lo devo trasformare in "true")
+        // il metodo isset() restituisce true o false. In questo caso "se esiste" restituisce true, altrimenti false
+        $post->published = isset($data['published']);
+
+        // salvo le modifiche al post a db
+        $post->save();
+
+        // salvo le modifiche al post a db passandogli quello che mi arriva dal form
+        // $post->update($data);
+        // in questo caso specifico non posso usare il metodo update perchè mi va in conflitto con la logica che gestisce lo slug
+
+        // reindirizzo alla rotta che mi restituisce la view del post appena modificato passandolgi l'id del post
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
