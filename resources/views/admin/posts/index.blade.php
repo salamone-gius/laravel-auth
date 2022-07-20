@@ -38,9 +38,14 @@
                                     </span>
                                 @endif
                             </td>
-                            <td>
+                            <td style="min-width: 350px;">
                                 <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary">Show post</a>
                                 <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-warning">Edit post</a>
+                                <form class="d-inline-block" action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger">Delete post</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

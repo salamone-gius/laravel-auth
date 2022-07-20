@@ -334,5 +334,24 @@
 
     - aggiungo qualche link/bottone per la navigazione.
 
+29. terminata la parte Update, passo alla parte Delete:
 
+    - il link che mi consentirà di cancellare un post (in index.blade) dovrà essere dentro un form poiché mi serve il metodo:
 
+        <form action="{{route('admin.posts.destroy', $post->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-danger">Delete post</button>
+        </form>
+
+    - in PostController dentro il metodo destroy() imposto la logica per cancellare il post:
+
+        // passo il model e il singolo $post come argomento del metodo update (dependancy injection)
+        public function destroy(Post $post)
+        {
+            // cancello il post selezionato
+            $post->delete();
+
+            // reindirizzo all'index aggiornato
+            return redirect()->route('admin.posts.index');
+        }

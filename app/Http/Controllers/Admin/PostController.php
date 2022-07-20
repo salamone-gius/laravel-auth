@@ -159,9 +159,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+
+    // passo il model e il singolo $post come argomento del metodo update (dependancy injection)
+    public function destroy(Post $post)
     {
-        //
+        // cancello il post selezionato
+        $post->delete();
+
+        // reindirizzo all'index aggiornato
+        return redirect()->route('admin.posts.index');
     }
 
     // creo un metodo privato (passandogli $title) che mi restituisce lo slug visto che la stessa logica la utilizzerò nell'update
